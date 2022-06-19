@@ -1,0 +1,164 @@
+{% extends 'layouts.html' %}
+{% load get_dict %}
+{% block content %}
+<div class="pl-5 pr-5">
+    <div class="row">
+        <div class="col-lg-4 col-md-3"></div>
+        <div class="col-lg-4 col-md-6 pt-2" style="z-index:0.5 ;">
+            {% if messages %}
+        {% for message in messages %}
+        
+        <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert"{% endif %}>
+            <strong>{{message}}</strong> 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+        {% endif %}
+        </div>
+        <div class="col-lg-4 col-md-3"></div>
+    </div>
+ <div class="row">
+    
+    <!--Blog row-->
+    <div class="col-lg-9">
+        <h2 style="font-family:monospace;">{{blog.blog_title|capfirst}}</h2>
+        <i class="fa fa-solid fa-clock"></i>{{blog.publish_date|date:'d-m-Y hA'}}
+        <i class="fa fa-solid fa-user"></i>&nbsp;{{blog.author}}.
+        <i class="fa fa-solid fa-thumbs-up"></i>&nbsp;{{blog.liked_blog.count}}&nbsp;Likes.
+        <i class="fa fa-solid fa-comment"></i>&nbsp;{{blog.Blog_comment.count}}&nbsp;Comments.
+        <i class="fa fa-solid fa-clock"></i>{{blog.update_date|date:'d-m-Y hA'}}(Updated).
+        <i class="fa fa-solid fa-eye"></i>&nbsp;{{blog.view_count}}&nbsp;views<p></p>
+        {{count}}
+        <img src="/media/{{blog.blog_image}}" alt="{{blog.blog_title}}" title="{{blog.blog_title}}" width="100%" height="500px">
+        <p style="font-family:monospace;">{{blog.blog_content|capfirst | linebreaks}}</p><hr>
+        <!---showing like and dislike button-->
+     {% if user.is_authenticated %}
+        {% if like %}
+        Remove Like&nbsp;&nbsp;<a href="{% url 'unliked_post' slug=blog.slug %}"><i class="fa fa-solid fa-thumbs-down" style="font-size:30px;"></i></a>
+        {% else %}
+        Like&nbsp;&nbsp;<a href="{% url 'liked_post' slug=blog.slug %}"><i class="fa fa-duotone fa-thumbs-up" style="font-size:30px;"></i></a>
+        {% endif %}
+        
+        
+     {% endif %}
+           <!--commenting form and comments-->
+      
+    <div class="row">
+        {% if user.is_authenticated %}
+        <div class="col-lg-5">
+            
+            <h5>Comment*</h5>
+            <form method="post">
+                <div class="form-group">
+                    <textarea name="comment" id="comment" cols="40" rows="5" placeholder="Your comment"></textarea>
+                    <input type="hidden" name="commentId" value="">
+                </div>
+                {% csrf_token %}<br><button type="submit" class="btn btn-sm" style="background-image: linear-gradient(to right, #52e66b,#b46cd8);">Comment</button>
+            </form>
+        </div>
+        <div class="col-lg-7">
+            
+            <hr>
+            
+          {% if comments %}
+                    <h5>Readers Comments</h5>
+            {% for comment in comments %}
+            <li class="media">
+                
+                {% if comment.user.user_profile.profile_pic %}
+                <img src="{{comment.user.user_profile.profile_pic.url}}" height="70px" width="60px" class="rounded-circle mx-2">
+                {% else %}
+                <img src="/media/profile_pics/avater.jpg/" height="70px" width="60px" class="rounded-circle mx-2">
+                 {% endif %}
+                <div class="media-body">
+                    <span class="text-muted pull-right">
+                        <small class="text-muted " style="float:right;">{{comment.comment_date}}</small>
+                    </span>
+                    <strong class="text-success">@{{comment.user}}</strong>
+                    <p>
+                        {{comment.comment}}
+                  </p>  
+                        {% if comment.user == request.user %}
+                            <a href="{% url 'delete_comment' slug=blog.slug id=comment.id %}" class="text-danger float-right" onclick="return confirm('are you sure?')">Delete</a>
+                        {% endif %}
+                  
+                    <a class="text-uppercase " type="button" data-bs-toggle="collapse" data-bs-target="#replybox{{comment.id}}" aria-expanded="false" aria-controls="replybox{{comment.id}}">
+                      <p class="">Reply</p>
+                      
+                    </a>
+                  <div class="collapse" id="replybox{{comment.id}}">
+                    <div class=" border card-body">
+                        <div>
+                            {% comment %} {% for reply in replyDict|get_val:comment.id %}
+                            {% endfor %} {% endcomment %}
+                                {% for reply in replies  %}
+                                            {% if reply.parent.id == comment.id %}
+                                                <small class="text-muted" style="float:right;">{{reply.comment_date}}</small>
+                        
+                                                <strong class="text-success">@{{reply.user}}</strong>
+                                                <p>
+                                                    {{reply.comment}}
+                                                
+                                                    <!--Comment Delete Button-->
+                                                    {% if reply.user == request.user %}
+                                                    <a href="{% url 'delete_comment' slug=blog.slug id=reply.id %}" class="text-danger float-right" onclick="return confirm('are you sure?')">Delete</a>
+                                                    {% endif %}</p>
+                                            
+                                            {% endif %}
+                                {% endfor %}
+                        </div>
+                        <!--Reply Posting form-->
+                        <form method="post" >
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="comment" placeholder="Enter Reply here">
+                                <input type="hidden" name="commentId" value="{{comment.id}}">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-sm" style="background-image: linear-gradient(to right, #52e66b,#b46cd8);">Reply</button>
+                        </form>
+                        
+                    </div>
+                  </div>
+                </div>
+            </li><br>{% endfor %}
+          {% else %}
+            <!--if there's is no comment-->
+            <p class="text-danger">Be The First To Comment!</p>
+          {% endif %}
+        </div>
+         </div>
+     <div class="col-lg-12"> 
+         <!--if the user is not logged in-->
+        {% else %}
+        <p>Login To React And Comment<a href="{% url 'login' %}">Log In</a></p>
+        {% endif %}
+     </div>
+    </div>
+    
+    
+    <!--profile and adds row-->
+    <div class="col-lg-3">
+        <div class="mt-5 " style="border-left:3px solid black;" >
+            {% if blog.author.user_profile.profile_pic %}
+                <img src="{{blog.author.user_profile.profile_pic.url}}" height="70px" width="60px" class="rounded-circle mx-2  pl-1"><br><br>
+                {% else %}
+                <img src="/media/profile_pics/avater.jpg/" height="70px" width="60px" class="rounded-circle mx-2 pl-1"><br><br>
+                 {% endif %}
+            <b class="pl-1">@{{blog.author}}</b>
+            <p class="text-bold pl-1 " style="color:#a8adb5;">{{blog.author.user_bio.user_profile_bio}}</p>
+        </div><br><br>
+        <h3>More Contents</h3><hr>
+        {% for Cat in CategoryBlog %}
+        <p style="float:right;">{{Cat.publish_date}}</p><br><br>
+        <h3 style="font-family: 'Arial Narrow Bold', sans-serif; font-size:20px;">{{Cat.blog_title|capfirst|truncatewords:30}}</h3><a href="{% url 'blog_details' slug=Cat.slug %}">Read More</a>
+        <br>
+        <h6> @&nbsp;{{Cat.author}}</h6>
+        {% endfor %}
+        
+    </div>
+    
+</div>
+</div>
+
+{% endblock content %}

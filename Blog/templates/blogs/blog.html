@@ -1,0 +1,114 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+<div class="container">
+  <br>
+        <!--message showing-->
+        <div class="row">
+          <div class="col-lg-4 col-md-3"></div>
+          <div class="col-lg-4 col-md-6 pt-2" style="z-index:0.5 ;">
+              {% if messages %}
+          {% for message in messages %}
+          
+          <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert"{% endif %}>
+              <strong>{{message}}</strong> 
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+          {% endif %}
+          </div>
+          <div class="col-lg-4 col-md-3"></div>
+        </div>
+        <!--message Ends here-->
+        <!--Category Starts here-->
+    <div class="row">
+        <div class="col-lg-10 col-sm-0 col-md-8">
+          <form class="form-inline my-2 my-lg-0" method="GET">
+            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+        <div class="col-lg-2 col-sm-12 col-md-4 ">
+            <div class="dropdown">
+              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-image: linear-gradient(to right, #52e66b,#b46cd8);">
+                Categories
+              </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="background-image: linear-gradient(to right,#b46cd8,#52e66b);">
+                    <a class="dropdown-item" href="{% url 'showing_blogs' %}">All blogs</a>
+                  {% for category in category %}
+                  <a class="dropdown-item" href="?category={{category.id}}">{{category.title}}</a>
+                  
+                  {% endfor %}
+                </div>
+              </div>
+        </div>
+        
+      </div><br><br>
+      <!--Category Ends here-->
+      {% if search %}
+      {% for searchBlog in result %}
+        {{searchBlog.blog_title}}
+      {% endfor %}
+      {% endif %}
+      {% if not search %}<p class="bg-success">hello world</p>{% endif %}
+    {% if blog %}
+    {% for blog in blog %}
+    
+    <div class="row" style="background-color:#f5f7fa; border-radius:20px;">
+    
+            <div class="col-lg-6">
+                <img src="/media/{{blog.blog_image}}" alt="{{blog.blog_title}}" title="" width="100%" height="300px">
+            </div>
+            <div class="col-lg-4">
+                <p style="float:right;">{{blog.publish_date}}</p><br><br>
+                <h3 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">{{blog.blog_title|capfirst|truncatewords:30}}</h3><a href="{% url 'blog_details' blog.slug %}">Read More</a>
+                <br>
+                <h6> @&nbsp;{{blog.author}}</h6>
+            </div>
+            
+        
+    </div>
+    {% endfor %}
+    <!--pagination Starts-->
+    <nav aria-label="..." class="my-5" style="background-image: linear-gradient(to right,#52e66b,#b46cd8);">
+      <ul class="pagination button" style="padding-left: 25%;">
+        <li class="page-item mt-1 text-white">{{blog}}</li>
+        {% if blog.has_previous %}
+        <li class="page-item" ><a class="page-link" href="?page=1" tabindex="-1" >First Page</a></li>
+
+        <li class="page-item" ><a class="page-link" href="?page={{blog.previous_page_number}}" tabindex="-1" >previous</a></li>
+        {% endif %}
+        {% if blog.start_index < 7 %}
+        <li class="page-item" aria-current="page">
+          <a class="page-link" href="?page=2">2</a>
+        </li>
+        <li class="page-item" aria-current="page">
+          <a class="page-link" href="?page=3">3</a>
+        </li>
+        {% endif %}
+        <li class="page-item" aria-current="page">
+          <a class="page-link" href="?page=4">4</a>
+        </li>
+        {% if blog.end_index > 7 %}
+        <li class="page-item" aria-current="page">
+          <a class="page-link" href="?page=5">5</a>
+        </li>
+        <li class="page-item" aria-current="page">
+          <a class="page-link" href="?page=6">6</a>
+        </li>
+        {% endif %}
+        {% if blog.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{blog.next_page_number}}">next</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    <!--pagination Ends-->
+    {% else %}
+    <h2 class="text-center mt-4 d-inline" >There is no video of this Category</h2>&nbsp;&nbsp;<a href="{% url 'showing_blogs' %}" class="text-right d-inline text-bold">continue</a>
+    <pre>
+
+    </pre>
+    {% endif %}
+
+</div>
+{% endblock content %}

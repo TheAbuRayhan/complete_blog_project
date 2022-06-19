@@ -1,0 +1,1 @@
+there are two option that i (figured out) can use to post comment and replies. One inspired by code with harry and another one from my thoughts. And i choosed to use mine. thought harry's one is commented in right place. Just removing comment tags that one also gonna work.(blog_details views of posts app and blog details template)

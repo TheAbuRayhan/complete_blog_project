@@ -1,0 +1,191 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+body{
+    font-family: sans-serif;
+     
+}
+#nav-bar{
+    position: sticky;
+    top:0;
+    z-index: 10;
+
+}
+.navbar{
+    background-image: linear-gradient(to right, #45db5e,#762b9c);
+    padding: 0;
+    
+}
+.navbar-brand img{
+    height: 70px;
+    width: 50px;
+    padding-left: 20px;
+}
+.navbar-nav li{
+    padding: 0 10px;
+}
+.navbar-nav li a{
+    color: #fff !important;
+    font-weight: 600;
+    float: right;
+    text-align: right;
+}
+.nav-link:hover{
+    background-image: linear-gradient(to right, #5cec74,#9648bd);
+}
+
+
+/*Sign Up form Starts here*/
+.signup{
+    margin: auto;
+    padding: auto;
+    margin-left: 100px;
+    background-color: #45db5e;
+}
+/*Sign Up form Ends here*/
+
+/*banner section starts here */
+#banner{
+    background-image: linear-gradient(to right, #52e66b,#b46cd8);
+    padding-top: 5%;
+    color: #fff;
+}
+/*for dropdown menu of navbar profile*/
+.ak{
+    background-image: linear-gradient(to right, #52e66b,#b46cd8);
+    color: #fff;
+}
+#aak{
+    background-image: linear-gradient(to right, #97eba5,#cba6dd);
+    padding-top: 5%;
+    color: #fff;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 5px 10px #c27777;
+}
+.promo-title{
+    font-size: 40px;
+    font-weight: 600;
+    margin-top: 100px;
+}
+.promo-title:hover{
+    color: rgb(96, 212, 41);
+}
+.play-btn{
+    width: 50px;
+    margin: 20px;
+}
+#banner a{
+    text-decoration: none;
+    color: #fff;
+}
+.bottom-img{
+    width: 100%;
+}
+.img-fluid{
+    background-color: #762b9c;
+}
+.bg-success1{
+    background-image: linear-gradient(to right,#52e66b,#b06dd1);
+}
+.bg-success1:hover{
+    background-image: linear-gradient(to right,#63ce75,#b06dd1);
+    width: 99.99%;
+   
+}
+
+
+.bg-success2{
+    background-image: linear-gradient(to right,#6ce286,#a052c7);
+}
+.bg-success2 :hover{
+   width: 99%;   
+}
+.banner2-p{
+    font-family: 'Courier New', Courier, monospace;
+}
+.banner2-img{
+    height: 400px;
+    width: 500px;
+}
+
+
+/*Card part starts here*/
+#card{
+    padding: 0%;
+    margin: 0%;
+    background-image: linear-gradient(to bottom,white,#99e796);
+}
+.wave{
+    height: 2px;
+    width: 100%;
+    background-color: #4b3755;
+    border: 2px dotted black;
+    margin-left:10% ;
+}
+.card{
+    background-image: linear-gradient(to right,white,rgb(156, 206, 156));
+}
+.card:hover{
+    box-shadow: 5px 5px rgb(184, 146, 146);
+    
+}
+
+/*testimonial Starts here*/
+#testimonials{
+    margin: 0px 0;
+}
+.testimonials{
+    border-left: 4px solid #7b1798;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.testimonials img{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+.user-details{
+    display: inline-block;
+    font-size: 12px;
+}
+.post-title{
+    font-style: italic;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/*social media starts here*/
+
+#social-media{
+    background: #f8f9fa;
+    padding: 100px 0;
+}
+#social-media p{
+    font-size:36px ;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+.social-icons img{
+    width: 60px;
+    transition: 0.5s;
+}
+.social-icons a:hover img{
+    transform: translateY(-10px);
+}
+/*footer section starts here*/
+#footer{
+    background-image: linear-gradient(to right,#762b9c,#45db5e);
+}
+.sub-button{
+    background-image:linear-gradient(to left,#45db5e,#762b9c);
+}
+
+/* Random design that implemented */
+.leftborder{
+    border-left:2px solid #52e66b;
+    
+}

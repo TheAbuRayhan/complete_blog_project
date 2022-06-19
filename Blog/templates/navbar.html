@@ -1,0 +1,56 @@
+{% load static %}
+<!--navbar-->
+<section id="nav-bar">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="/"><img src="{% static 'images/download-removebg-preview.png' %}" alt="" style="width:160px; height:50px;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">HOME <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'showing_blogs' %}">POSTS</a>
+            </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'write' %}">WRITE</a>
+              </li>
+              
+              {% if user.is_authenticated %}
+              <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-solid fa-user"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="background-image: linear-gradient(to right, #42c057,#a659cc);">
+                  <li><a class="dropdown-item" href="{% url 'profile' %}">PROFILE</a></li>
+                  <li><a class="dropdown-item" href="{% url 'logout' %}" onclick="return confirm('are you sure?')">LOGOUT</a></li>
+                  <li><a class="dropdown-item" href="{% url 'signup' %}">SIGN UP</a></li>
+                </ul>
+              </div>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'signup' %}">SIGN UP</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">LOGIN</a>
+              </li>
+              {% endif %}
+              
+              
+            <li class="nav-item">
+              <a class="nav-link" href="#social-media">ABOUT US</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#testimonials">TESTIMONIALS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#footer">CONTACT</a>
+              </li>
+              
+          </ul>
+        </div>
+      </nav></section>
+<!--navbar Ends-->
