@@ -1,0 +1,187 @@
+{% extends 'layouts.html' %}
+{% load static %}
+{% block content %}
+<div class="row ak">
+  <div class="col-lg-4 col-md-3"></div>
+  <div class="col-lg-4 col-md-6 pt-2" style="z-index:0.5 ;">
+      {% if messages %}
+  {% for message in messages %}
+  
+  <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert"{% endif %}>
+      <strong>{{message}}</strong> 
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+  {% endif %}
+  </div>
+  <div class="col-lg-4 col-md-3"></div>
+</div>
+<!--Banner section starts here-->
+<section id="banner">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 text-center bg-success1">
+              <p class="promo-title">   BEST DIGITAL AGENCY</p>
+              <P>Subscribe Easy tutorial YouTube Channel to watch  more videos on website development, Digital Marketing, Wordpress</P>
+                <a href="{% url 'showing_blogs' %}"><img src="{% static 'images/play.png' %}" alt="" class="play-btn">Let's Explore</a>
+          </div>
+      </div>
+      <div class="col-md-6 text-center col-lg-6 float-right bg-success2">
+        <img src="{% static 'images/connectivity-removebg-preview.png' %}" alt="" class="img-fluid bg-success2">
+      </div>
+  </div>
+  <img src="{% static 'images/wave1.png' %}" alt="" class="bottom-img">
+</section>
+
+<!--banner number 2 starts here-->
+<section id="banner2">
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-lg-6">
+      <p class=" promo-title" style="text-shadow: 2px 2px #a7ada5;">Boost Your Productivity.</p>
+        <p class="banner2-p"><i>boost your productivity. Let's get to know everything you need in this modern world Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati id distinctio fugiat vel nihil. Iste exercitationem paria</i></p>
+    </div>
+    <div class="col-md-6 col-lg-6" >
+      <img src="{% static 'images/images.png' %}" alt="" class="banner2-img">
+    </div>
+  </div>
+  
+</div>
+<div class=" "></div>
+<div class="w-100 card-writing text-center text-success text-uppercase " style="font-size:30px; font-weight:bolders; text-shadow: 2px 2px #a7ada5; "> Things You Get To Learn About.</div>
+<div class=" "></div><br>
+
+</section>
+<!--banner parts Ends-->
+
+<!--Card parts starts here-->
+<section id="card">
+<div class="container">
+<div class="row">
+<div class="col-lg-4 col-md-6">
+  <div class="card" style="width: 20rem; height:400px; border:1px solid black;">
+    <img class="card-img-top" src="{% static 'images/science-box.jpg' %}" alt="Card image cap">
+    <div class="card-body">
+      <h4>Learn About Science</h4>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+  </div><br>
+</div>
+<div class="col-lg-4 col-md-6">
+  <div class="card" style="width: 20rem; height:400px;border:1px solid black;">
+    <img class="card-img-top" src="{% static 'images/technology-box.jpg' %}" alt="Card image cap">
+    <div class="card-body">
+      <h4>Drive Deep Into Technology</h4>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+  </div><br>
+</div>
+<div class="col-lg-4 col-md-6">
+  <div class="card" style="width: 20rem; height:400px;border:1px solid black;">
+    <img class="card-img-top" src="{% static 'images/productivity-box.jpg' %}" alt="Card image cap">
+    <div class="card-body">
+      <h4>Gather Knowledge About Productivity</h4>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<img src="wave1.png" alt="">
+</section>
+<!--Card parts End here-->
+<!--Recent post card starts here-->
+<section id="post">
+<div class="container">
+<h2 class="text-center post-title" style="text-shadow: 2px 2px #a7ada5;">Recently Posted Blogs</h2><hr>
+<div class="row ">
+<div class="col-lg-5">
+<div class="card" style="width: 100%; height:550px;">
+  <img src="{{blogs.1.blog_image.url}}}" class="card-img-top" alt="..." style="width: 100%; height:400px;">
+  <div class="card-body">
+    <h5 class="card-title">{{blogs.1.blog_title}}</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+   </div>
+</div>
+</div><br>
+<div class="col-lg-7">
+<div class="card" style="width: 100%; height:550px;">
+  <img src="{% static 'images/post4.jpg' %}" class="card-img-top" alt="..." style="width: 100%; height:400px;">
+  <div class="card-body">
+    <h5 class="card-title">Technology have gone so far.</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+   </div>
+</div>
+</div>
+</div><br>
+<div class="row">
+<div class="col-lg-8">
+  <div class="card" style="width: 100%; height:550px;">
+    <img src="{% static 'images/post1-removebg-preview.png' %}" class="card-img-top" alt="..." style="width: 100%; height:400px;">
+    <div class="card-body">
+      <h5 class="card-title"> The miracle of Physics.</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+     </div>
+  </div>
+</div><br>
+<div class="col-lg-4">
+  <div class="card" style="width: 100%; height:550px;">
+    <img src="{% static 'images/technology-box.jpg' %}" class="card-img-top" alt="..." style="width: 100%; height:400px;">
+    <div class="card-body">
+      <h5 class="card-title">Team Work is the pillar of Success.</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+     </div>
+  </div>
+</div>
+<a href="{% url 'showing_blogs' %}" class="text-center" style="font-size:larger;">See More</a>
+</div>
+</div>
+</section><br>
+<!----Recent post Card Ends here ---->
+
+<!--Testimonial Section Starts here ---->
+<hr>
+<div class=""></div>
+<div class="card-writing text-center text-success text-uppercase " style="font-size: larger; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; text-shadow: 1px 1px #a7ada5;"> What Readers Says About This Website.</div>
+<div class=""></div><hr><br>
+<section id="testimonials">
+<div class="container">
+<div class="row offset-1">
+<div class="col-md-5 testimonials">
+  <p class="user-details">Subscribe Easy tutorials YouTube Channel to watch more videos on website development, Digital Marketing, WordPress and Graphics Designing</p>
+  <img src="{% static 'images/user1.jpg' %}" alt="">
+  <p><b>Agelina</b><br>Co-founder at xyz</p>
+</div>
+<div class="col-md-5 testimonials">
+  <p class="user-details">Subscribe Easy tutorials YouTube Channel to watch more videos on website development, Digital Marketing, WordPress and Graphics Designing</p>
+  <img src="{% static 'images/user2.jpg' %}" alt="">
+  <p><b>Khole</b><br>Works At Abc inc</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!---Testimonial Section Ends here ---->
+
+
+<!--Social Media Section Starts here---->
+<section id="social-media">
+<div class="container text-center">
+<p>FIND US SOCIAL MEDIA</p>
+<div class="social-icons">
+<a href="https://www.facebook.com/"><img src="{% static 'images/facebook-icon.png' %}" alt=""></a>
+<a href=""><img src="{% static 'images/instagram-icon.png' %}" alt=""></a>
+<a href=""><img src="{% static 'images/twitter-icon.png' %}" alt=""></a>
+<a href=""><img src="{% static 'images/whatsapp-icon.png' %}" alt=""></a>
+<a href=""><img src="{% static 'images/linkedin-icon.png' %}" alt=""></a>
+<a href=""><img src="{% static 'images/snapchat-icon.png' %}" alt=""></a>
+
+</div>
+</div>
+<img src="{% static 'images/wave2.png' %}" alt="" style="width:100%;">
+</section><div class="clear"></div>
+<!--Social Media Section Ends here-->
+
+
+{% endblock %}

@@ -1,0 +1,72 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" rel="stylesheet">
+  
+    {% block css_block %}
+    {% endblock %}
+
+    {% block title %}
+    <title>Blogs</title>
+    {% endblock title %}
+
+  </head>
+  <body>
+
+        <!--navbar-->
+        {% include 'navbar.html' %}
+
+{% block content %}
+
+
+{% endblock %}
+<!--Footer section starts here-->
+      <section id="footer">
+        <img src="{% static 'images/wave2.png' %}" alt="" class="footer-img" style="width:100%;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 footer-box">
+              <img src="{% static 'images/download-removebg-preview.png' %}" alt="" style="height:55%; width:55%;">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam velit voluptate quaerat eaque tempora, cupiditate quidem unde eum, saepe earum inventore sequi ut possimus? Nihil excepturi numquam fuga! Perferendis, doloribus.</div>
+            <div class="col-md-4 footer-box">
+              <p><b>CONTACT US</b></p>
+              <p><i class="fa fa-map-marker"></i> Trade Centre, Cumilla</p>
+              <p><i class="fa fa-phone"></i> Phone:08485973</p>
+              <p><i class="fas fa-mail-bulk "></i> Email: example@gmail.com</p>
+            </div>
+            <div class="col-md-4 footer-box">
+              <p><b>SUBSCRIBE NEWSLETTER</b></p>
+              <form action="" method="post">
+                {% csrf_token %}
+                <input type="email" class="form-control" placeholder="Your Email" name="email"><br>
+              <button type="submit" class="btn btn-primary sub-button">Subscribe</button>
+              </form>
+            </div>
+          </div>
+          <hr>
+          <p class="copyright text-center">Website DESIGNED And DEVELOPED by &copy;Aby RayhaN</p>
+        </div>
+    </section><div class="clear"></div>
+  
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Optional JavaScript -->
+    <!--Smooth scroll-->
+    <script src="{% static 'smooth-scroll.js' %}"></script>
+    <script>
+      var scroll = new SmoothScroll('a[href*="#"]');
+    </script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    
+  </body>
+</html><div class="clear"></div>

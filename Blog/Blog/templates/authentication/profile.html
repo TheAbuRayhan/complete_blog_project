@@ -1,0 +1,64 @@
+{% extends 'layouts.html' %}
+{% block title %}<title> Profile </title>{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-4 col-md-3"></div>
+    <div class="col-lg-4 col-md-6 pt-2" style="z-index:0.5 ;">
+        {% if messages %}
+    {% for message in messages %}
+    
+    <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert"{% endif %}>
+        <strong>{{message}}</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+    {% endif %}
+    </div>
+    <div class="col-lg-4 col-md-3"></div>
+</div>
+<h2 class="text-center text-uppercase" style="font-family:monospace;">Your Profile</h2>
+
+<br>
+<div class="container">
+<div class="row">
+    <div class="col-lg-4 border-success text-center" style="background-image: linear-gradient(to right, #97eba5,#cba6dd);padding-top: 1%;border: 2px solid black;border-radius: 10px;font-family:monospace; height:500px;">
+        {% if user.user_profile %}
+<img src='/media/{{user.user_profile.profile_pic}}' class="rounded-circle" style="width:100px; margin-top:20px; height: 120px;"><br>
+<a href="{% url 'change_pro_pic' %}" class="">Change</a>
+{% else %}
+<img src='/media/profile_pics/avater.jpg' class="rounded-circle" style="width:100px ; height: 120px;"><br>
+
+<a href="{% url 'add_pro_pic' %}" class="">Add</a>
+{% endif %}
+<p>Username: {{ user.username }}</p>
+<p>Email: {{ user.email }}</p>
+<p>Name: {{user.first_name }} {{ user.last_name }}</p>
+{% if user.user_bio %}Bio: {{user.user_bio.user_profile_bio}}<br><a href="{% url 'change_bio' %}">Edit</a> {% else %}<a href="{% url 'update_bio' %}">Add Bio</a>{% endif %}</p>
+Total Post:{{user.post_author.count}}<br>
+<a href="{% url 'user_change' %}" class="btn ak btn-sm">Edit Profile Info</a><p></p>
+    </div><br>
+    <!--Profile Part Ends here-->
+    <div class="col-lg-8">
+        {% for blog in user.post_author.all %}
+    
+    <div class="row" style="background-image: linear-gradient(to right,white,#e8faeb); border-radius: 10px;">
+    
+            <div class="col-lg-6">
+                <img src="/media/{{blog.blog_image}}" alt="{{blog.blog_title}}" title="" width="100%" height="250px">
+            </div>
+            <div class="col-lg-4">
+                <p style="float:right;">{{blog.publish_date}}</p><br>
+                <h3 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">{{blog.blog_title|capfirst|truncatewords:10}}</h3><a href="{% url 'blog_details' slug=blog.slug %}">Read More</a>
+                
+                <h6> @&nbsp;{{blog.author}}</h6><a href="{% url 'edit_blog' slug=blog.slug %}">Edit</a> . <a href="{% url 'delete_blog' slug=blog.slug %}" class="text-danger" onclick="return confirm('are you sure?')">Delete</a>
+            </div>
+            
+        
+    </div>
+
+
+{% endfor %}
+    </div>
+</div>
+</div>
+{% endblock %}
